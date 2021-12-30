@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Table from "./components/Table";
 
 const App = () => {
   const [dataArray, setDataArray] = useState([]);
@@ -22,7 +23,11 @@ const App = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  return <div className="App">Data goes here</div>;
+  return (
+    <div className="App">
+      <Table items={dataArray} />
+    </div>
+  );
 };
 
 export default App;
