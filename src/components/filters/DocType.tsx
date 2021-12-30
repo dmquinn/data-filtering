@@ -1,4 +1,15 @@
-const DocType = ({ docTypeFilter, setDocTypeFilter }) => {
+import { useEffect } from "react";
+
+const DocType = ({
+  docTypeFilter,
+  setDocTypeFilter,
+  setKeywordArray,
+  setInputValue,
+}) => {
+  useEffect(() => {
+    setInputValue("");
+    setKeywordArray([]);
+  }, [docTypeFilter]);
   return (
     <div className="col-sm-12 col-md-4 py-1">
       <div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import DocType from "./components/filters/DocType";
 import Published from "./components/filters/Published";
 import Range from "./components/filters/Range";
+import Search from "./components/filters/Search";
 import PaginationButtons from "./components/PaginationButtons";
 import Table from "./components/Table";
 
@@ -9,6 +10,8 @@ const App = () => {
   const [dataArray, setDataArray] = useState([]);
   const [pageIndex, setPageIndex] = useState<number>(1);
   const [currentItems, setCurrentItems] = useState([]);
+  const [keywordArray, setKeywordArray] = useState([]);
+  const [inputValue, setInputValue] = useState<string>("");
   const [docTypeFilter, setDocTypeFilter] = useState({
     primary: true,
     extended: true,
@@ -90,11 +93,19 @@ const App = () => {
 
   return (
     <div className="App">
+      <Search
+        data={dataArray}
+        setKeywordArray={setKeywordArray}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+      />{" "}
       <Range setRangeValues={setRangeValues} />
       <DocType
         docTypeFilter={docTypeFilter}
         setDocTypeFilter={setDocTypeFilter}
-      />
+        setKeywordArray={setKeywordArray}
+        setInputValue={setInputValue}
+      />{" "}
       <Published isPublished={isPublished} setIsPublished={setIsPublished} />
       <PaginationButtons pageIndex={pageIndex} setPageIndex={setPageIndex} />
       <Table items={currentItems} />
