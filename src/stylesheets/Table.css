@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+* {
+  font-family: "Nunito", sans-serif;
+}
+
+table {
+  width: 70vw;
+  border-collapse: collapse;
+  margin: 50px auto;
+}
+
+tr:nth-of-type(odd) {
+  background: rgb(231, 231, 231);
+}
+
+th {
+  background: #db3434;
+  color: white;
+  font-weight: bold;
+}
+
+td,
+th {
+  padding: 15px;
+  text-align: left;
+  font-size: 18px;
+}
+
+@media only screen and (max-width: 760px) {
+  table {
+    width: 100%;
+  }
+
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  td {
+    border: none;
+    position: relative;
+    text-align: center;
+  }
+
+  td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    color: #000;
+    font-weight: bold;
+  }
+}

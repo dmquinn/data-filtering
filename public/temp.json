@@ -1,0 +1,183 @@
+[{
+    "uuid": "0faacd1e-1832-4f54-8d37-2700a33c6d95",
+    "body": {
+      "bankName": "Osinski - Glover Bank",
+      "bankBIC": [
+        "PDQUTLR1854"
+      ],
+      "reportScore": 66.6926392371562,
+      "type": "intermediate"
+    },
+    "createdAt": "2019-06-12T18:23:30.745Z",
+    "publishedAt": "2022-06-23T09:56:00.698Z"
+  },
+  {
+    "uuid": "b06333b3-f802-429a-8c68-849120561593",
+    "body": {
+      "bankName": "Flatley and Sons Bank",
+      "bankBIC": [
+        "PHWUMNG1"
+      ],
+      "reportScore": 146.83116143096606,
+      "type": "intermediate"
+    },
+    "createdAt": "2020-03-17T19:58:02.651Z",
+    "publishedAt": "2020-02-07T15:57:22.404Z"
+  },
+  {
+    "uuid": "82bc651d-563c-4def-a207-a1b72cf8918b",
+    "body": {
+      "bankName": "Labadie - Christiansen Bank",
+      "bankBIC": [
+        "FBMEVNE1015"
+      ],
+      "reportScore": 60.86315841382381,
+      "type": "extended"
+    },
+    "createdAt": "2019-09-24T22:12:24.258Z",
+    "publishedAt": "2020-07-04T12:49:54.499Z"
+  },
+  {
+    "uuid": "9fbd1881-7a9b-4c41-baa4-11c8196872f6",
+    "body": {
+      "bankName": "Ryan and Sons Bank",
+      "bankBIC": [
+        "ZYKUILL1791"
+      ],
+      "reportScore": 85.97471342438317,
+      "type": "extended"
+    },
+    "createdAt": "2019-08-30T16:30:00.153Z",
+    "publishedAt": "2020-08-04T16:03:32.450Z"
+  },
+  {
+    "uuid": "2e125279-40ef-4d9b-a28e-06de3efa5a2a",
+    "body": {
+      "bankName": "Mitchell, Ondricka and Leffler Bank",
+      "bankBIC": [
+        "MFAIATG1590"
+      ],
+      "reportScore": 64.0434550187847,
+      "type": "extended"
+    },
+    "createdAt": "2020-05-14T01:28:38.957Z",
+    "publishedAt": "2021-01-30T03:07:42.481Z"
+  },
+  {
+    "uuid": "97e1740a-9af5-4fb7-8a5a-0346e3b44793",
+    "body": {
+      "bankName": "Schultz LLC Bank",
+      "bankBIC": [
+        "VUQOSOF1262"
+      ],
+      "reportScore": 112.57234661692473,
+      "type": "primary"
+    },
+    "createdAt": "2019-08-03T10:34:30.947Z",
+    "publishedAt": "2022-01-29T16:18:00.824Z"
+  },
+  {
+    "uuid": "7eed978d-7e18-4ca4-9b3a-8536fb848834",
+    "body": {
+      "bankName": "Reichert LLC Bank",
+      "bankBIC": [
+        "CUWOCGB1262"
+      ],
+      "reportScore": 91.72344101015382,
+      "type": "intermediate"
+    },
+    "createdAt": "2019-07-26T23:21:30.342Z",
+    "publishedAt": "2021-04-26T23:08:30.178Z"
+  },
+  {
+    "uuid": "e45d78e9-8cd0-4ba8-a461-95422419e86d",
+    "body": {
+      "bankName": "Berge - Schaden Bank",
+      "bankBIC": [
+        "TCNAGAI1899"
+      ],
+      "reportScore": 61.82811058378708,
+      "type": "extended"
+    },
+    "createdAt": "2020-01-24T09:20:04.333Z",
+    "publishedAt": "2019-10-26T07:49:22.084Z"
+  },
+  {
+    "uuid": "39c7ea30-e2a8-4cde-87fb-1e657876d25e",
+    "body": {
+      "bankName": "Eichmann - Boyle Bank",
+      "bankBIC": [
+        "ZDWIAXV1253"
+      ],
+      "reportScore": 68.53026579623284,
+      "type": "intermediate"
+    },
+    "createdAt": "2020-05-02T15:59:24.547Z",
+    "publishedAt": "2019-11-05T15:50:24.149Z"
+  },
+  {
+    "uuid": "69b2fdc3-da58-44ca-b135-f699e571beba",
+    "body": {
+      "bankName": "Schuppe - Daniel Bank",
+      "bankBIC": [
+        "UFDASKF1"
+      ],
+      "reportScore": 64.81071807249326,
+      "type": "primary"
+    },
+    "createdAt": "2020-04-13T03:00:13.112Z",
+    "publishedAt": "2019-07-03T22:12:18.736Z"
+  },
+  {
+    "uuid": "977d0766-a33e-421f-8194-b70bbc019bdc",
+    "body": {
+      "bankName": "Tromp Group Bank",
+      "bankBIC": [
+        "XAQINIO1433"
+      ],
+      "reportScore": 90.39917797042803,
+      "type": "primary"
+    },
+    "createdAt": "2019-08-22T13:04:55.920Z",
+    "publishedAt": "2019-12-23T01:08:40.673Z"
+  },
+  {
+    "uuid": "947075c1-03c6-4e72-bcb5-8f50ed4fe010",
+    "body": {
+      "bankName": "Hodkiewicz - O'Connell Bank",
+      "bankBIC": [
+        "LQOEBQJ1"
+      ],
+      "reportScore": 64.98605985602418,
+      "type": "extended"
+    },
+    "createdAt": "2019-08-02T11:46:41.523Z",
+    "publishedAt": "2021-03-12T06:38:42.944Z"
+  },
+  {
+    "uuid": "9701134e-4d07-47ce-a3a8-94bb7f24e2ff",
+    "body": {
+      "bankName": "Zemlak, Abshire and Runolfsdottir Bank",
+      "bankBIC": [
+        "NRGAMMT1861"
+      ],
+      "reportScore": 106.58803963686678,
+      "type": "primary"
+    },
+    "createdAt": "2020-04-23T01:16:27.964Z",
+    "publishedAt": "2020-10-22T11:55:17.970Z"
+  },
+  {
+    "uuid": "ea0468c4-6b62-4d69-a86f-b08a7a85031c",
+    "body": {
+      "bankName": "Test",
+      "bankBIC": [
+        "Test"
+      ],
+      "reportScore": 143.99705259738334,
+      "type": "intermediate"
+    },
+    "createdAt": "2019-08-11T19:25:40.527Z",
+    "publishedAt": "2022-06-20T20:11:18.939Z"
+  }
+  ]
