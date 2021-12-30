@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DocType from "./components/filters/DocType";
 import Published from "./components/filters/Published";
+import Range from "./components/filters/Range";
 import PaginationButtons from "./components/PaginationButtons";
 import Table from "./components/Table";
 
@@ -17,6 +18,8 @@ const App = () => {
     yes: true,
     no: true,
   });
+  const [rangeValues, setRangeValues] = useState<number[]>([50, 200]);
+
   const itemsPerPage = 10;
 
   ///ensures both date formats are the same for comparison
@@ -46,8 +49,6 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    dataArray && console.log(dataArray);
-
     const newArray = [];
     /// check if each key[docTypeFilter] returns true
     const checkedKeys = Object.keys(docTypeFilter);
@@ -57,14 +58,24 @@ const App = () => {
         newArray.push(...output);
       }
     });
+    const filterByRange = newArray.filter(
+      (item) =>
+        item.body.reportScore >= rangeValues[0] &&
+        item.body.reportScore <= rangeValues[1]
+    );
+
     const publishFiltering = [];
 
     if (isPublished.yes) {
-      const d = newArray.filter((item) => dateFixer(item.publishedAt) < now);
+      const d = filterByRange.filter(
+        (item) => dateFixer(item.publishedAt) < now
+      );
       publishFiltering.push(...d);
     }
     if (isPublished.no) {
-      const e = newArray.filter((item) => dateFixer(item.publishedAt) > now);
+      const e = filterByRange.filter(
+        (item) => dateFixer(item.publishedAt) > now
+      );
       publishFiltering.push(...e);
     }
     publishFiltering &&
@@ -75,10 +86,11 @@ const App = () => {
           itemsPerPage * pageIndex
         )
       );
-  }, [docTypeFilter, isPublished]);
+  }, [docTypeFilter, isPublished, rangeValues]);
 
   return (
     <div className="App">
+      <Range setRangeValues={setRangeValues} />
       <DocType
         docTypeFilter={docTypeFilter}
         setDocTypeFilter={setDocTypeFilter}
