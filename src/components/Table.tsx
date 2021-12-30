@@ -1,8 +1,14 @@
 import React from "react";
+import { DataType } from "../../types";
 
 import "../stylesheets/Table.css";
 
-const Table = ({ items }) => {
+interface Props {
+  items: DataType[] | [];
+}
+
+const Table: React.FC<Props> = ({ items }) => {
+  console.log("items", items);
   return (
     <>
       <table>

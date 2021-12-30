@@ -1,6 +1,15 @@
-import { useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
+import { DataType, DocType } from "../../../types";
+import "../../stylesheets/Checkbox.css";
 
-const DocType = ({
+interface Props {
+  docTypeFilter: DocType;
+  setDocTypeFilter: Dispatch<SetStateAction<DocType>>;
+  setKeywordArray: Dispatch<SetStateAction<DataType[] | []>>;
+  setInputValue: Dispatch<SetStateAction<string>>;
+}
+
+const TypeOfDoc: React.FC<Props> = ({
   docTypeFilter,
   setDocTypeFilter,
   setKeywordArray,
@@ -34,6 +43,7 @@ const DocType = ({
           <input
             type="checkbox"
             id="extended"
+            //defaultValue={docTypeFilter.extended}
             checked={docTypeFilter.extended}
             onChange={() =>
               setDocTypeFilter({
@@ -49,6 +59,7 @@ const DocType = ({
           <input
             type="checkbox"
             id="intermediate"
+            //defaultValue={docTypeFilter.intermediate}
             checked={docTypeFilter.intermediate}
             onChange={() =>
               setDocTypeFilter({
@@ -63,4 +74,4 @@ const DocType = ({
     </div>
   );
 };
-export default DocType;
+export default TypeOfDoc;

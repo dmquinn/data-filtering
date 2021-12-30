@@ -1,6 +1,12 @@
 import { Dispatch, SetStateAction } from "react";
+import { PublishedType } from "../../../types";
 
-const Published = ({ isPublished, setIsPublished }) => {
+interface Props {
+  isPublished: PublishedType;
+  setIsPublished: Dispatch<SetStateAction<PublishedType>>;
+}
+
+const Published: React.FC<Props> = ({ isPublished, setIsPublished }) => {
   return (
     <div className="col-sm-12 col-md-4">
       <label className="control control-checkbox">

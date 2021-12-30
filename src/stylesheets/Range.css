@@ -1,0 +1,25 @@
+.bar-inner {
+  background: #bdbdbd !important;
+}
+.multi-range-slider,
+.bar,
+.bar-inner,
+.bar-left,
+.bar-right,
+.thumb::before,
+.max-value,
+.min-value {
+  box-shadow: none !important;
+  border: none !important;
+}
+.thumb:before {
+  background: #df4444 !important;
+}
+.multi-range-slider {
+  width: 70%;
+}
+
+.max-value,
+.min-value {
+  background: #df4444 !important;
+}

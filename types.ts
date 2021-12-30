@@ -1,5 +1,5 @@
 export type DataType = {
-    uuid?: string,
+    uuid: string,
     publishedAt: string,
     createdAt: string,
     body: {
@@ -11,3 +11,12 @@ export type DataType = {
     map:any,
     }
 
+export type DocType = {
+    primary: boolean,
+    extended: boolean,
+    intermediate: boolean,
+}
+export type PublishedType= {
+    yes?: boolean,
+    no?: boolean,
+}

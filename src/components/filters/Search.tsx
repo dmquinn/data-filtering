@@ -1,7 +1,19 @@
 import { Dispatch, SetStateAction } from "react";
 import { DataType } from "../../../types";
 
-const Search = ({ setKeywordArray, data, inputValue, setInputValue }) => {
+interface Props {
+  setKeywordArray: Dispatch<SetStateAction<DataType[] | []>>;
+  data: DataType[];
+  inputValue: string;
+  setInputValue: Dispatch<SetStateAction<string>>;
+}
+
+const Search: React.FC<Props> = ({
+  setKeywordArray,
+  data,
+  inputValue,
+  setInputValue,
+}) => {
   const newArray = [];
   const handleSearch = (e) => {
     setInputValue(e.target.value);

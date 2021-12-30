@@ -1,6 +1,11 @@
-import React from "react";
+import { Dispatch, SetStateAction } from "react";
 
-const PaginationButtons = ({ pageIndex, setPageIndex }) => {
+interface Props {
+  pageIndex: number;
+  setPageIndex: Dispatch<SetStateAction<number>>;
+}
+
+const PaginationButtons: React.FC<Props> = ({ setPageIndex, pageIndex }) => {
   return (
     <>
       {pageIndex !== 1 && (

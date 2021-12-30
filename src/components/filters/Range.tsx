@@ -1,15 +1,20 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
-// @ts-ignore
-//no @types<package> for the slider package, this line must be ignored
+//multi-range-slider-react has no @types<package> and must be ignored
+//@ts-ignore
 import MultiRangeSlider from "multi-range-slider-react";
 import "../../stylesheets/Range.css";
 
-const Range = ({ setRangeValues }) => {
+interface Props {
+  setRangeValues: Dispatch<SetStateAction<number[]>>;
+}
+
+const Range: React.FC<Props> = ({ setRangeValues }) => {
   const [minValue, setMinValue] = useState(50);
   const [maxValue, setMaxValue] = useState(200);
   const handleInput = (e) => {
     setMinValue(e.minValue);
     setMaxValue(e.maxValue);
+    console.log(maxValue, minValue);
   };
 
   return (

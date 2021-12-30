@@ -10,6 +10,7 @@
     "@types/node": "^16.11.17",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
+    "inga-ui": "^1.0.12",
     "multi-range-slider-react": "^1.0.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
