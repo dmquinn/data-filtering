@@ -1,10 +1,24 @@
 import React from "react";
 
-const PaginationButtons = () => {
+const PaginationButtons = ({ pageIndex, setPageIndex }) => {
   return (
-    <div>
-      <button></button>
-    </div>
+    <>
+      {pageIndex !== 1 && (
+        <button
+          className="button bg-blue-light text-white mr-1"
+          onClick={() => setPageIndex(pageIndex - 1)}
+        >
+          BACK
+        </button>
+      )}
+
+      <button
+        className="button bg-red-light text-white"
+        onClick={() => setPageIndex(pageIndex + 1)}
+      >
+        NEXT
+      </button>
+    </>
   );
 };
 
