@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DocType from "./components/filters/DocType";
+import Published from "./components/filters/Published";
 import PaginationButtons from "./components/PaginationButtons";
 import Table from "./components/Table";
 
@@ -12,9 +13,20 @@ const App = () => {
     extended: true,
     intermediate: true,
   });
-
+  const [isPublished, setIsPublished] = useState({
+    yes: true,
+    no: true,
+  });
   const itemsPerPage = 10;
 
+  ///ensures both date formats are the same for comparison
+  const now = new Date().toISOString().split("T")[0];
+  const dateFixer = (a) => {
+    const date = a.split("D").pop().split("T").shift();
+    return date;
+  };
+
+  //mock API call
   const dataFetch = async () => {
     try {
       const res = await fetch("./reports.json");
@@ -34,6 +46,8 @@ const App = () => {
   }, []);
 
   useEffect(() => {
+    dataArray && console.log(dataArray);
+
     const newArray = [];
     /// check if each key[docTypeFilter] returns true
     const checkedKeys = Object.keys(docTypeFilter);
@@ -41,15 +55,27 @@ const App = () => {
       if (docTypeFilter[x]) {
         const output = dataArray.filter((item) => item.body.type === x);
         newArray.push(...output);
-        console.log(newArray);
       }
     });
-    newArray &&
+    const publishFiltering = [];
+
+    if (isPublished.yes) {
+      const d = newArray.filter((item) => dateFixer(item.publishedAt) < now);
+      publishFiltering.push(...d);
+    }
+    if (isPublished.no) {
+      const e = newArray.filter((item) => dateFixer(item.publishedAt) > now);
+      publishFiltering.push(...e);
+    }
+    publishFiltering &&
       setCurrentItems(
         //slice array to show only 10 items at once
-        newArray.slice(itemsPerPage * (pageIndex - 1), itemsPerPage * pageIndex)
+        publishFiltering.slice(
+          itemsPerPage * (pageIndex - 1),
+          itemsPerPage * pageIndex
+        )
       );
-  }, [docTypeFilter]);
+  }, [docTypeFilter, isPublished]);
 
   return (
     <div className="App">
@@ -57,6 +83,7 @@ const App = () => {
         docTypeFilter={docTypeFilter}
         setDocTypeFilter={setDocTypeFilter}
       />
+      <Published isPublished={isPublished} setIsPublished={setIsPublished} />
       <PaginationButtons pageIndex={pageIndex} setPageIndex={setPageIndex} />
       <Table items={currentItems} />
     </div>
