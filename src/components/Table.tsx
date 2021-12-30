@@ -3,7 +3,6 @@ import React from "react";
 import "../stylesheets/Table.css";
 
 const Table = ({ items }) => {
-  console.log("items", items);
   return (
     <>
       <table>
