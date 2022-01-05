@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 //multi-range-slider-react has no @types<package> and must be ignored
 //@ts-ignore
 import MultiRangeSlider from "multi-range-slider-react";
@@ -9,40 +9,28 @@ interface Props {
 }
 
 const Range: React.FC<Props> = ({ setRangeValues }) => {
-  const [minValue, setMinValue] = useState(50);
-  const [maxValue, setMaxValue] = useState(200);
   const handleInput = (e) => {
-    setMinValue(e.minValue);
-    setMaxValue(e.maxValue);
-    console.log(maxValue, minValue);
+    setRangeValues([e.minValue, e.maxValue]);
   };
 
   return (
-    <form
-      className="col-sm-12 col-md-4 4 py-1"
-      onSubmit={(e) => {
-        e.preventDefault();
-        setRangeValues([minValue, maxValue]);
-      }}
-    >
+    <div className="col-sm-12 mt-1">
+      <p>Report Scores</p>
+      <p className="text-4">Please provide minimum and maximum values</p>
       <MultiRangeSlider
-        min={50}
+        //min changed from 50 to 0
+        min={0}
         max={200}
         step={1}
         ruler={false}
-        // label={true}
         preventWheel={false}
-        minValue={minValue}
-        maxValue={maxValue}
+        minValue={25}
+        maxValue={150}
         onChange={(e) => {
           handleInput(e);
         }}
-        onMouseUp={() => setRangeValues([minValue, maxValue])}
       />
-      <button type="submit" className="submit">
-        SUBMIT
-      </button>
-    </form>
+    </div>
   );
 };
 

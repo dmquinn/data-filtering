@@ -10,7 +10,7 @@ const Published: React.FC<Props> = ({ isPublished, setIsPublished }) => {
   return (
     <div className="col-sm-12 col-md-4">
       <label className="control control-checkbox">
-        Publised{" "}
+        Published{" "}
         <input
           type="checkbox"
           id="yes"
@@ -22,7 +22,7 @@ const Published: React.FC<Props> = ({ isPublished, setIsPublished }) => {
         <div className="control_indicator"></div>
       </label>
       <label className="control control-checkbox">
-        Unpublised{" "}
+        Unpublished{" "}
         <input
           type="checkbox"
           id="no"

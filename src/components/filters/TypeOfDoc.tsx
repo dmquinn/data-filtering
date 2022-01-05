@@ -1,33 +1,32 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
-import { DataType, DocType } from "../../../types";
+import { ReportObjectType, DocType } from "../../../types";
 import "../../stylesheets/Checkbox.css";
 
 interface Props {
   docTypeFilter: DocType;
   setDocTypeFilter: Dispatch<SetStateAction<DocType>>;
-  setKeywordArray: Dispatch<SetStateAction<DataType[] | []>>;
+  setSearchResultsArray: Dispatch<SetStateAction<ReportObjectType[] | []>>;
   setInputValue: Dispatch<SetStateAction<string>>;
 }
 
 const TypeOfDoc: React.FC<Props> = ({
   docTypeFilter,
   setDocTypeFilter,
-  setKeywordArray,
+  setSearchResultsArray,
   setInputValue,
 }) => {
   useEffect(() => {
     setInputValue("");
-    setKeywordArray([]);
-  }, [docTypeFilter]);
+    setSearchResultsArray([]);
+  }, [docTypeFilter, setInputValue, setSearchResultsArray]);
   return (
     <div className="col-sm-12 col-md-4 py-1">
       <div>
         <label className="control control-checkbox">
-          Primary
+          Primary{" "}
           <input
             type="checkbox"
             id="primary"
-            //defaultValue={docTypeFilter.primary}
             checked={docTypeFilter.primary}
             onChange={() =>
               setDocTypeFilter({
@@ -35,15 +34,14 @@ const TypeOfDoc: React.FC<Props> = ({
                 primary: !docTypeFilter.primary,
               })
             }
-          />
+          />{" "}
           <div className="control_indicator"></div>
         </label>
         <label className="control control-checkbox">
-          Extended
+          Extended{" "}
           <input
             type="checkbox"
             id="extended"
-            //defaultValue={docTypeFilter.extended}
             checked={docTypeFilter.extended}
             onChange={() =>
               setDocTypeFilter({
@@ -51,15 +49,14 @@ const TypeOfDoc: React.FC<Props> = ({
                 extended: !docTypeFilter.extended,
               })
             }
-          />
+          />{" "}
           <div className="control_indicator"></div>
         </label>
         <label className="control control-checkbox">
-          Intermediate
+          Intermediate{" "}
           <input
             type="checkbox"
             id="intermediate"
-            //defaultValue={docTypeFilter.intermediate}
             checked={docTypeFilter.intermediate}
             onChange={() =>
               setDocTypeFilter({
@@ -67,7 +64,7 @@ const TypeOfDoc: React.FC<Props> = ({
                 intermediate: !docTypeFilter.intermediate,
               })
             }
-          />
+          />{" "}
           <div className="control_indicator"></div>
         </label>
       </div>

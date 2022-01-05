@@ -1,4 +1,4 @@
-export type DataType = {
+export type ReportObjectType = {
     uuid: string,
     publishedAt: string,
     createdAt: string,
@@ -8,7 +8,6 @@ export type DataType = {
         reportScore?: number,
         type?: string,
     },
-    map:any,
     }
 
 export type DocType = {

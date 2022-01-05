@@ -1,57 +1,60 @@
-import React from "react";
-import { DataType } from "../../types";
-
+import { ReportObjectType } from "../../types";
 import "../stylesheets/Table.css";
 
 interface Props {
-  items: DataType[] | [];
+  items: ReportObjectType[] | [];
 }
 
 const Table: React.FC<Props> = ({ items }) => {
-  console.log("items", items);
+  const timeFormat = (date) => {
+    const formattedDate = date.split("T").shift();
+    return formattedDate;
+  };
+
+  const dateFormat = (date) => {
+    const formattedDate = date.split("T").pop().split(".").shift();
+    return formattedDate;
+  };
   return (
-    <>
-      <table>
-        <thead>
-          <tr>
-            <th>Bank Name</th>
-            <th>BIC</th>
-            <th>Report Score</th>
-            <th>Type</th>
-            <th>Created</th>
-            <th>Published</th>
-          </tr>
-        </thead>
-        <tbody>
-          {!!items &&
-            items.map((item, i) => {
-              const bankDetails = item.body;
-              return (
-                <tr key={i}>
-                  <td>{bankDetails.bankName}</td>
-                  <td>{bankDetails.bankBIC[0]}</td>
-                  <td>{bankDetails.reportScore.toFixed(3)}</td>
-                  <td>{bankDetails.type}</td>
-                  <td>
-                    <span> {item.createdAt.split("T").shift()}</span>
-                    <span className="text-grey-dark">
-                      {" "}
-                      {item.createdAt.split("T").pop().split(".").shift()}
-                    </span>
-                  </td>
-                  <td>
-                    <span> {item.publishedAt.split("T").shift()}</span>
-                    <span className="text-grey-dark">
-                      {" "}
-                      {item.publishedAt.split("T").pop().split(".").shift()}
-                    </span>
-                  </td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </table>
-    </>
+    <table>
+      <thead>
+        <tr>
+          <th>Bank Name</th>
+          <th>BIC</th>
+          <th>Report Score</th>
+          <th>Type</th>
+          <th>Created</th>
+          <th>Published</th>
+        </tr>
+      </thead>
+      <tbody>
+        {items.map((item, i) => {
+          const bankDetails = item.body;
+          return (
+            <tr key={i}>
+              <td>{bankDetails.bankName}</td>
+              <td>{bankDetails.bankBIC[0]}</td>
+              <td>{bankDetails.reportScore.toFixed(3)}</td>
+              <td>{bankDetails.type}</td>
+              <td>
+                <span>{timeFormat(item.createdAt)}</span>
+                <span className="text-grey-dark">
+                  {" "}
+                  {dateFormat(item.createdAt)}
+                </span>
+              </td>
+              <td>
+                <span> {timeFormat(item.publishedAt)}</span>
+                <span className="text-grey-dark">
+                  {" "}
+                  {dateFormat(item.publishedAt)}
+                </span>
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
   );
 };
 

@@ -5,97 +5,63 @@ import Search from "./components/filters/Search";
 import Published from "./components/filters/Published";
 import Table from "./components/Table";
 import Range from "./components/filters/Range";
-import { DataType, PublishedType, DocType } from "../types";
+import { filterFunction } from "./utils/functions";
+import { ReportObjectType, PublishedType, DocType } from "../types";
 
 const App: React.FC = () => {
   const [pageIndex, setPageIndex] = useState<number>(1);
-  const [keywordArray, setKeywordArray] = useState<DataType[] | []>([]);
+  const [searchResultsArray, setSearchResultsArray] = useState<
+    ReportObjectType[] | []
+  >([]);
   const [inputValue, setInputValue] = useState<string>("");
   const [rangeValues, setRangeValues] = useState<number[]>([50, 200]);
   const [isPublished, setIsPublished] = useState<PublishedType>({
     yes: true,
     no: true,
   });
-  const [dataArray, setDataArray] = useState<[] | DataType[]>([]);
-  const [currentItems, setCurrentItems] = useState<[] | DataType[]>([]);
+  const [dataArray, setDataArray] = useState<[] | ReportObjectType[]>([]);
+  const [currentItems, setCurrentItems] = useState<[] | ReportObjectType[]>([]);
   const [docTypeFilter, setDocTypeFilter] = useState<DocType>({
     primary: true,
     extended: true,
     intermediate: true,
   });
+  const [showNextButton, setShowNextButton] = useState<boolean>(true);
   const itemsPerPage = 10;
 
-  ///ensures both date formats are the same for comparison
-  const now = new Date().toISOString().split("T")[0];
-  const dateFixer = (a) => {
-    const date = a.split("D").pop().split("T").shift();
-    return date;
-  };
   //mock API call from ./public
-  const dataFetch = async () => {
-    try {
-      const res = await fetch("./reports.json");
-      const data = res.json();
-      return data;
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  async function fetchData() {
+    const res = await fetch("./reports.json");
+    res
+      .json()
+      .then((res) => setDataArray(res))
+      .catch((err) => console.log(err));
+  }
 
   useEffect(() => {
-    dataFetch()
-      .then((data) => {
-        setDataArray(data);
-      })
-      .catch((err) => console.log(err));
+    fetchData();
   }, []);
 
   useEffect(() => {
-    let test = dataArray;
-
-    const checker = (docTypeFilter) => {
-      const newArray = [];
-      /// check if each key[docTypeFilter] returns true
-      const checkedKeys = Object.keys(docTypeFilter);
-      checkedKeys.map((x, i) => {
-        if (docTypeFilter[x]) {
-          const output = dataArray.filter((item) => item.body.type === x);
-          newArray.push(...output);
-        }
-      });
-      const filterByRange = newArray.filter(
-        (item) =>
-          item.body.reportScore >= rangeValues[0] &&
-          item.body.reportScore <= rangeValues[1]
-      );
-
-      ///published/unpublished filters
-      const publishFiltering = [];
-
-      if (isPublished.yes) {
-        const d = filterByRange.filter(
-          (item) => dateFixer(item.publishedAt) < now
-        );
-        publishFiltering.push(...d);
-      }
-      if (isPublished.no) {
-        const e = filterByRange.filter(
-          (item) => dateFixer(item.publishedAt) > now
-        );
-        publishFiltering.push(...e);
-      }
-      return publishFiltering;
-    };
-    const filtered = checker(docTypeFilter);
-    filtered.length && (test = filtered);
-    setCurrentItems(
-      //slice array to show only 10 items at once
-      test.slice(itemsPerPage * (pageIndex - 1), itemsPerPage * pageIndex)
+    const filtered = filterFunction(
+      searchResultsArray.length ? searchResultsArray : dataArray,
+      docTypeFilter,
+      rangeValues,
+      isPublished
     );
-    keywordArray.length && setCurrentItems(keywordArray);
+    //slice array to show only 10 items at once
+
+    setCurrentItems(
+      filtered.slice(itemsPerPage * (pageIndex - 1), itemsPerPage * pageIndex)
+    );
+    if (filtered.length <= itemsPerPage * pageIndex) {
+      setShowNextButton(false);
+    } else {
+      setShowNextButton(true);
+    }
   }, [
     pageIndex,
-    keywordArray,
+    searchResultsArray,
     docTypeFilter,
     isPublished,
     rangeValues,
@@ -104,28 +70,37 @@ const App: React.FC = () => {
 
   return (
     <div className="p-4">
-      <div className="row j-center">
-        <h2>Elucidate Coding Challenge</h2>
+      <div className="row w-100 p-lg-10">
+        <h2 className="mb-1">Elucidate Coding Challenge</h2>
+
         <Search
           data={dataArray}
-          setKeywordArray={setKeywordArray}
+          setSearchResultsArray={setSearchResultsArray}
           inputValue={inputValue}
           setInputValue={setInputValue}
         />
       </div>
-      <div className="row j-between px-10 separater">
+      <h5 className="px-10 mb-1">Filters</h5>
+
+      <div className="row j-center mb-1"></div>
+      <div className="row j-between px-10 separator">
         <Published isPublished={isPublished} setIsPublished={setIsPublished} />
         <Range setRangeValues={setRangeValues} />
         <TypeOfDoc
           docTypeFilter={docTypeFilter}
           setDocTypeFilter={setDocTypeFilter}
-          setKeywordArray={setKeywordArray}
+          setSearchResultsArray={setSearchResultsArray}
           setInputValue={setInputValue}
         />{" "}
       </div>
-      <div className="row j-end pr-10">
-        <PaginationButtons pageIndex={pageIndex} setPageIndex={setPageIndex} />
-      </div>
+      {/* <div className="row j-end w-80"> */}
+      <PaginationButtons
+        pageIndex={pageIndex}
+        setPageIndex={setPageIndex}
+        showNextButton={showNextButton}
+        // setShowNextButton={showNextButton}
+      />
+      {/* </div> */}
       {currentItems.length && <Table items={currentItems} />}
     </div>
   );
