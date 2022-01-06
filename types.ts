@@ -1,12 +1,14 @@
 export type ReportObjectType = {
     uuid: string,
-    publishedAt: string,
-    createdAt: string,
+    publishedAt: string | Date,
+    createdAt: string | Date,
     body: {
         bankBIC: string[],
         bankName: string,
         reportScore?: number,
-        type?: string,
+        type?: {primary: string, 
+            extended: string, 
+            intermediate: string},
     },
     }
 

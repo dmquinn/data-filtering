@@ -10,6 +10,7 @@ import { ReportObjectType, PublishedType, DocType } from "../types";
 
 const App: React.FC = () => {
   const [pageIndex, setPageIndex] = useState<number>(1);
+  const [numReports, setNumReports] = useState<number>(10);
   const [searchResultsArray, setSearchResultsArray] = useState<
     ReportObjectType[] | []
   >([]);
@@ -59,6 +60,11 @@ const App: React.FC = () => {
     } else {
       setShowNextButton(true);
     }
+    if (filtered.length > 0) {
+      setNumReports(filtered.length);
+    } else if (filtered.length === 0) {
+      setNumReports(0);
+    }
   }, [
     pageIndex,
     searchResultsArray,
@@ -69,10 +75,9 @@ const App: React.FC = () => {
   ]);
 
   return (
-    <div className="p-4">
-      <div className="row w-100 p-lg-10">
+    <div className="p-2">
+      <div className="row w-75 j-between ml-lg-10">
         <h2 className="mb-1">Elucidate Coding Challenge</h2>
-
         <Search
           data={dataArray}
           setSearchResultsArray={setSearchResultsArray}
@@ -80,27 +85,33 @@ const App: React.FC = () => {
           setInputValue={setInputValue}
         />
       </div>
-      <h5 className="px-10 mb-1">Filters</h5>
+      <h5 className="px-lg-10 mb-1">Filters</h5>
 
-      <div className="row j-center mb-1"></div>
-      <div className="row j-between px-10 separator">
+      <div className="row">
         <Published isPublished={isPublished} setIsPublished={setIsPublished} />
-        <Range setRangeValues={setRangeValues} />
         <TypeOfDoc
           docTypeFilter={docTypeFilter}
           setDocTypeFilter={setDocTypeFilter}
           setSearchResultsArray={setSearchResultsArray}
           setInputValue={setInputValue}
         />{" "}
+        <Range setRangeValues={setRangeValues} />
       </div>
-      {/* <div className="row j-end w-80"> */}
-      <PaginationButtons
-        pageIndex={pageIndex}
-        setPageIndex={setPageIndex}
-        showNextButton={showNextButton}
-        // setShowNextButton={showNextButton}
-      />
-      {/* </div> */}
+      <div className="row j-between">
+        <p className="pl-10 mt-1 text-4">
+          {numReports > 10 &&
+            `showing ${itemsPerPage * pageIndex - 9} - ${
+              itemsPerPage * pageIndex
+            } of `}
+          {numReports} items
+        </p>{" "}
+        <h3>page {pageIndex}</h3>
+        <PaginationButtons
+          pageIndex={pageIndex}
+          setPageIndex={setPageIndex}
+          showNextButton={showNextButton}
+        />
+      </div>
       {currentItems.length && <Table items={currentItems} />}
     </div>
   );
